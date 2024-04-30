@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""log stats from collection
+"""All the log stats thats from the collection
 """
 from pymongo import MongoClient
 
@@ -8,22 +8,23 @@ METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"]
 
 
 def log_stats(mongo_collection, option=None):
-    """ script that provides some stats about Nginx logs stored in MongoDB
+    """ A script that helps provides some of the stats
+    thats about Nginx logs tthat are stored in MongoDB
     """
-    items = {}
+    itemms = {}
     if option:
-        value = mongo_collection.count_documents(
+        valuee = mongo_collection.count_documents(
             {"method": {"$regex": option}})
-        print(f"\tmethod {option}: {value}")
+        print(f"\tmethod {option}: {valuee}")
         return
 
-    result = mongo_collection.count_documents(items)
-    print(f"{result} logs")
+    resultt = mongo_collection.count_documents(itemms)
+    print(f"{resultt} logs")
     print("Methods:")
-    for method in METHODS:
-        log_stats(nginx_collection, method)
-    status_check = mongo_collection.count_documents({"path": "/status"})
-    print(f"{status_check} status check")
+    for methodd in METHODS:
+        log_stats(nginx_collection, methodd)
+    statuss_checkk = mongo_collection.count_documents({"path": "/status"})
+    print(f"{statuss_checkk} status check")
 
 
 if __name__ == "__main__":
