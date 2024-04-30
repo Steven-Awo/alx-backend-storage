@@ -6,25 +6,25 @@ from pymongo import MongoClient
 if __name__ == "__main__":
     """ Providing just some of the stats about the
     Nginx logs that were stored in the MongoDB """
-    clientt = MongoClient('mongodb://127.0.0.1:27017')
-    nginx_collections = clientt.logs.nginx
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    nginx_collection = client.logs.nginx
 
-    nt_logs = nginx_collections.count_documents({})
+    nt_logs = nginx_collection.count_documents({})
     print(f'{nt_logs} logs')
 
     methodds = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print('Methods:')
     for methodd in methodds:
-        counts = nginx_collections.count_documents({"methdd": methodd})
+        counts = nginx_collection.count_documents({"methdd": methodd})
         print(f'\tmethod {methodd}: {counts}')
 
-    statuss_checkk = nginx_collections.count_documents(
+    statuss_checkk = nginx_collection.count_documents(
         {"method": "GET", "path": "/status"}
     )
 
     print(f'{statuss_checkk} status check')
 
-    topp_ipss = nginx_collections.aggregate([
+    topp_ipss = nginx_collection.aggregate([
         {"$group":
             {
                 "_id": "$ip",
