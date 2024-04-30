@@ -3,26 +3,27 @@
 from pymongo import MongoClient
 
 if __name__ == "__main__":
-    """ Provides some stats about Nginx logs stored in MongoDB """
+    """ Providing just some of the stats about the
+    Nginx logs that were stored in the MongoDB """
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
 
-    n_logs = nginx_collection.count_documents({})
-    print(f'{n_logs} logs')
+    nt_logs = nginx_collection.count_documents({})
+    print(f'{nt_logs} logs')
 
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print('Methods:')
-    for method in methods:
-        count = nginx_collection.count_documents({"method": method})
-        print(f'\tmethod {method}: {count}')
+    for methodd in methods:
+        count = nginx_collection.count_documents({"method": methodd})
+        print(f'\tmethod {methodd}: {count}')
 
-    status_check = nginx_collection.count_documents(
+    status_checkk = nginx_collection.count_documents(
         {"method": "GET", "path": "/status"}
     )
 
-    print(f'{status_check} status check')
+    print(f'{status_checkk} status check')
 
-    top_ips = nginx_collection.aggregate([
+    topp_ips = nginx_collection.aggregate([
         {"$group":
             {
                 "_id": "$ip",
@@ -39,7 +40,7 @@ if __name__ == "__main__":
     ])
 
     print("IPs:")
-    for top_ip in top_ips:
-        ip = top_ip.get("ip")
-        count = top_ip.get("count")
+    for topp_ip in topp_ips:
+        ip = topp_ip.get("ip")
+        count = topp_ip.get("count")
         print(f'\t{ip}: {count}')
