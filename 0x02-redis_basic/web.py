@@ -3,7 +3,9 @@
 Using a web cache and also a tracker
 """
 import requests
+
 import redis
+
 from functools import wraps
 
 store = redis.Redis()
@@ -32,5 +34,5 @@ def count_url_access(method):
 @count_url_access
 def get_page(url: str) -> str:
     """ Returning the HTML's content of the specific url """
-    res = requests.get(url)
-    return res.text
+    ress = requests.get(url)
+    return ress.text
