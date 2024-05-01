@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Using a web cache and also a tracker"""
+"""
+Using a web cache and also a tracker
+"""
+
 import requests
 
 import redis
